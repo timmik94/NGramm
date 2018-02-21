@@ -16,6 +16,28 @@ namespace NGramm
       public  List<NGramm> endmodel = new List<NGramm>();
 
 
+        //only unigramm
+        public Candidate ExistsWord(string word)
+        {
+            NGramm ngr = endmodel.First(n => n.textstr.Contains(word));
+            if (ngr != null)
+            {
+                return new Candidate()
+                {
+                    sts = ngr.textstr,
+                    prob = ngr.probability
+                };
+            }
+            else return null;
+        }
+
+        //only unigramm
+        public float probability(string word)
+        {
+            var f = endmodel.Find(n => n.textstr == word).probability;
+            return f;
+        }
+
 
         public void NormalizeModel(Model Prev,bool laplas)
         {
@@ -109,7 +131,6 @@ namespace NGramm
                 textstr += " ";
             }
         }
-
     }
     public class ArraysComparer : IComparer<string[]>
     {

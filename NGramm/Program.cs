@@ -42,6 +42,9 @@ namespace NGramm
             unknowncount = unk;
             Console.WriteLine("OutputFile");
             string path = Console.ReadLine();
+            Console.WriteLine("Test Sentence");
+            string test = Console.ReadLine();
+
 
             string[] corpfiles = Directory.GetFiles(corpus);
             //List<string> allTokens=new List<string>();
@@ -58,6 +61,14 @@ namespace NGramm
             StreamWriter sw = new StreamWriter(path, false);// FileMode.Create);
             sw.WriteLine( JsonConvert.SerializeObject(models[n - 1]));
             sw.Close();
+
+            Checkercs check = new Checkercs()
+            {
+                model = models[0]
+            };
+
+            Console.WriteLine(check.CorrectSentence(test));
+
        //     model = new Model();
 
 
